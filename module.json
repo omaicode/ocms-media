@@ -1,0 +1,14 @@
+{
+    "name": "Media",
+    "alias": "media",
+    "type": "composer",
+    "description": "Media module for OCMS",
+    "keywords": [],
+    "priority": 1,
+    "providers": [
+        "Modules\\Media\\Providers\\MediaServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
