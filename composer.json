@@ -2,6 +2,7 @@
     "name": "omaicode/ocms-media",
     "description": "Media module for OCMS",
     "minimum-stability": "dev",
+    "license": "MIT",
     "authors": [
         {
             "name": "Bieber Kieu",
@@ -24,7 +25,14 @@
         "maennchen/zipstream-php": "^1.0|^2.0",
         "spatie/image": "^1.0.0",
         "spatie/temporary-directory": "^1.1|^2.0",
-        "symfony/console": "^4.4|^5.0"
+        "symfony/console": "^4.4|^5.0",
+        "omaicode/laravel-enum": "*@dev",
+        "omaicode/larinfo": "*@dev",
+        "omaicode/modules-management": "*@dev",
+        "omaicode/permissions-management": "*@dev",
+        "omaicode/repository": "*@dev",
+        "omaicode/laravel-table-builder": "*@dev",
+        "omaicode/log-viewer": "*@dev"        
     },
     "require-dev": {
         "ext-pdo_sqlite": "*",
