@@ -1,6 +1,7 @@
 {
     "name": "omaicode/ocms-media",
-    "description": "",
+    "description": "Media module for OCMS",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Bieber Kieu",
