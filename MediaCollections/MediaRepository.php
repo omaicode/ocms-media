@@ -65,6 +65,11 @@ class MediaRepository
         return $this->query()->whereIn($this->model->getKeyName(), $ids)->get();
     }
 
+    public function getByUuids(array $uuids): DbCollection
+    {
+        return $this->query()->whereIn('uuid', $uuids)->get();
+    }
+
     public function getByIdGreaterThan(int $startingFromId, bool $excludeStartingId = false, string $modelType = ''): DbCollection
     {
         return $this->query()
