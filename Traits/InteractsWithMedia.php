@@ -16,11 +16,13 @@ trait InteractsWithMedia
 
     public function getMedia(string $column)
     {
+        $this->registerMediaSavePath();
         return $this->mediaRetriever()->findById($this->{$column});
     }
 
     public function getMediaUrl(string $column)
     {
+        $this->registerMediaSavePath();
         $retriever = $this->mediaRetriever();
 
         if(isset($this->{$column})) {
