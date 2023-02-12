@@ -13,11 +13,15 @@
 
 Route::prefix(config('core.admin_prefix'))
 ->middleware('auth:admins')
-->as('admin.')
+->as('admin.media.')
 ->namespace('Admin')
 ->group(function() {
-    Route::prefix('media/api')->as('media.')->group(function() {
+    Route::get('media', 'MediaController@index')->name('index');
+    Route::prefix('media/api')->group(function() {
         Route::post('list', 'MediaController@list')->name('list');
         Route::post('upload', 'MediaController@upload')->name('upload');
+        Route::post('create-folder', 'MediaController@createFolder')->name('create-folder');
+        Route::post('move', 'MediaController@move')->name('move');
+        Route::post('delete', 'MediaController@destroy')->name('delete');
     });
 });

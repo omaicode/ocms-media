@@ -5,15 +5,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Routing\Events\RouteMatched;
 
-use Modules\Media\Conversions\Commands\RegenerateCommand;
-use Modules\Media\MediaCollections\Commands\CleanCommand;
-use Modules\Media\MediaCollections\Commands\ClearCommand;
-use Modules\Media\MediaCollections\Filesystem;
-use Modules\Media\MediaCollections\MediaRepository;
-use Modules\Media\MediaCollections\Models\Observers\MediaObserver;
-use Modules\Media\ResponsiveImages\TinyPlaceholderGenerator\TinyPlaceholderGenerator;
-use Modules\Media\ResponsiveImages\WidthCalculator\WidthCalculator;
-
 use Menu;
 
 class MediaServiceProvider extends ServiceProvider
@@ -39,10 +30,10 @@ class MediaServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-        $this->loadMenus();
+        $this->loadMenus();   
 
-        $mediaClass = config('media.media_model');
-        $mediaClass::observe(new MediaObserver());        
+        $this->app->bind(\Modules\Media\Abstracts\MediaAbstract::class, \Modules\Media\Support\Retriever::class);
+        $this->app->bind(\Modules\Media\Abstracts\MediaAbstract::class, \Modules\Media\Support\Uploader::class);
     }
 
     /**
@@ -53,13 +44,6 @@ class MediaServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(RouteServiceProvider::class);
-        $this->app->scoped(MediaRepository::class, function () {
-            $mediaClass = config('media.media_model');
-
-            return new MediaRepository(new $mediaClass());
-        });
-
-        $this->registerCommands();
     }
 
     /**
@@ -145,22 +129,5 @@ class MediaServiceProvider extends ServiceProvider
                 }
             }
         });        
-    }    
-
-    protected function registerCommands(): void
-    {
-        $this->app->bind(Filesystem::class, Filesystem::class);
-        $this->app->bind(WidthCalculator::class, config('media.responsive_images.width_calculator'));
-        $this->app->bind(TinyPlaceholderGenerator::class, config('media.responsive_images.tiny_placeholder_generator'));
-
-        $this->app->bind('command.media:regenerate', RegenerateCommand::class);
-        $this->app->bind('command.media:clear', ClearCommand::class);
-        $this->app->bind('command.media:clean', CleanCommand::class);
-
-        $this->commands([
-            'command.media:regenerate',
-            'command.media:clear',
-            'command.media:clean',
-        ]);
     }    
 }

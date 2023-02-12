@@ -4,7 +4,7 @@ namespace Modules\Media\Http\Requests\Admin;
 
 use Modules\Core\Http\Requests\BaseApiRequest;
 
-class ListRequest extends BaseApiRequest
+class DeleteRequest extends BaseApiRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,7 +14,8 @@ class ListRequest extends BaseApiRequest
     public function rules()
     {
         return [
-            'path' => 'nullable|string|max:255'
+            'items'   => ['required', 'array'],
+            'items.*' => ['required', 'string', 'max:255']
         ];
     }
 

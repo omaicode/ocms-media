@@ -14,8 +14,9 @@ class UploadRequest extends BaseApiRequest
     public function rules()
     {
         return [
-            'model' => 'required|string|max:50',
-            'file'  => 'required|file|mimes:jpg,jpeg,png,gif,bmp,mp4,mov,avi|max:5120'
+            'path' => 'required|string|max:255',
+            'files' => 'required|array',
+            'files.*' => 'required|file'
         ];
     }
 

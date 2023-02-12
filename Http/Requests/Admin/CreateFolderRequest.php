@@ -4,7 +4,7 @@ namespace Modules\Media\Http\Requests\Admin;
 
 use Modules\Core\Http\Requests\BaseApiRequest;
 
-class ListRequest extends BaseApiRequest
+class CreateFolderRequest extends BaseApiRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,7 +14,8 @@ class ListRequest extends BaseApiRequest
     public function rules()
     {
         return [
-            'path' => 'nullable|string|max:255'
+            'path'        => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z0-9_\/]+$/'],
+            'folder_name' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z0-9_\/]+$/']
         ];
     }
 
