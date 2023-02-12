@@ -10,7 +10,7 @@ class Uploader extends MediaAbstract
     /**
      * 
      * @param UploadedFile $uploaded_file 
-     * @return void 
+     * @return Illuminate\Support\Collection 
      */
     public function upload(UploadedFile $uploaded_file)
     {
@@ -21,7 +21,7 @@ class Uploader extends MediaAbstract
     /**
      * 
      * @param UploadedFile[] $uploaded_file s
-     * @return void 
+     * @return Illuminate\Support\Collection 
      */
     public function uploadMultiple(array $uploaded_files)
     {
